@@ -1,0 +1,17 @@
+{
+    "contents" : "##\n## Helper functions for inverting matrices\n## cache results for re-use\n##\n\n## makeCacheMatrix()\n##\n## Take invertible matrix as parameter,setup\n## list of functions for use in cacheSolve()\n##\n## Quick 3x3 test matrix:\n## tm <- \n##  matrix(sample.int(15, 9*100, TRUE), 3, 3)\n\nmakeCacheMatrix <- function(x = matrix()) {\n\n  m <- NULL\n  set <- function(y) {\n    x <<- y\n    m <<- NULL\n  }\n  get <- function() x\n  setinverse <- function(solve) m <<- solve\n  getinverse <- function() m\n  list(set = set, get = get,\n       setinverse = setinverse,\n       getinverse = getinverse) \n  \n}\n\n## Take result of makeCacheMatrix(), return\n## inverse. Use existing \"cached\" result if\n## value exists for \"m\"\n\ncacheSolve <- function(x, ...) {\n  ## Return a matrix that is the inverse of 'x'\n  m <- x$getinverse()\n  if(!is.null(m)) {\n    message(\"getting cached data\")\n    return(m)\n  }\n  data <- x$get()\n  m <- solve(data, ...)\n  x$setinverse(m)\n  m\n  \n}\n",
+    "created" : 1437928398141.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3893567789",
+    "id" : "17C6DEB2",
+    "lastKnownWriteTime" : 1437934284,
+    "path" : "~/GitHub/ProgrammingAssignment2/cachematrix.R",
+    "project_path" : "cachematrix.R",
+    "properties" : {
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "type" : "r_source"
+}
